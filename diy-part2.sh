@@ -30,7 +30,9 @@ sed -i 's/192.168.1.1/192.168.123.2/g' package/base-files/files/bin/config_gener
 sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
 
 # MosDNS
-git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
+rm -rf feeds/packages/net/mosdns
+rm -rf feeds/luci/applications/luci-app-mosdns
+git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
 # 需要 golang 1.20.x 或最新版本（需要 openwrt-21.02 或更旧版本）
 rm -rf feeds/packages/lang/golang
