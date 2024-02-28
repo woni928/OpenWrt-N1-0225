@@ -31,6 +31,7 @@ sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl
 
 # MosDNS
 rm -rf feeds/packages/net/mosdns
+rm -rf feeds/packages/mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
