@@ -34,7 +34,3 @@ rm -rf feeds/packages/net/mosdns
 rm -rf feeds/packages/mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 git clone https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
-
-# 需要 golang 1.20.x 或最新版本（需要 openwrt-21.02 或更旧版本）
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
