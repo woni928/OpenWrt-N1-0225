@@ -88,7 +88,6 @@ jobs:
         echo "硬盘详情："
         df -Th
 
-
     - name: 克隆源码
       working-directory: /workdir
       run: |
@@ -101,7 +100,7 @@ jobs:
         echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
         echo "tag_name=$(date +%Y%m%d)" >> $GITHUB_ENV
 		
-	- name: 缓冲
+    - name: 缓冲
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
@@ -211,7 +210,7 @@ jobs:
               2024-0224：插件更新到最新。
               2024-0229：增加docker。
               2024-0303：插件更新到最新。
-			  2024-0309：测试缓冲。
+	      2024-0309：测试缓冲。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
@@ -219,6 +218,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           keep_minimum_runs: 0
-          retain_days: 15
+          retain_days: 30
           #retain_days: ${{ github.event.inputs.action_days }}
           
