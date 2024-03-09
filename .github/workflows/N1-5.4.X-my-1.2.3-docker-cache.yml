@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: N1-5.4.X-my-1.2.3-doocker
+name: N1-5.4.X-my-1.2.3-doocker-cache
 
 on:
   repository_dispatch:
@@ -88,6 +88,12 @@ jobs:
         echo "硬盘详情："
         df -Th
 
+    - name: 缓冲
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
+        mixkey: ${{ env.DEVICE_ARCH }}
+        prefix: ${{ github.workspace }}/openwrt
 
     - name: 克隆源码
       working-directory: /workdir
@@ -204,7 +210,7 @@ jobs:
               2024-0224：插件更新到最新。
               2024-0229：增加docker。
               2024-0303：插件更新到最新。
-              2024-0309：同步上游的更新。
+              2024-0309：测试cache。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
