@@ -2,6 +2,9 @@
 # Automatically generated file; DO NOT EDIT.
 # OpenWrt Configuration
 #
+#!/bin/bash
+cd openwrt
+cat >> .config <<EOF
 CONFIG_MODULES=y
 CONFIG_HAVE_DOT_CONFIG=y
 CONFIG_HOST_OS_LINUX=y
@@ -7897,3 +7900,4 @@ CONFIG_PACKAGE_v2dat=y
 # CONFIG_PACKAGE_fontconfig is not set
 # end of Font-Utils
 # end of Xorg
+EOF
