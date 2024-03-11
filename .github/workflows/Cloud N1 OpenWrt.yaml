@@ -81,6 +81,7 @@ jobs:
         ./scripts/feeds update -a
         cat feeds/packages/utils/xfsprogs/Makefile
         sed -i 's/TARGET_CFLAGS += -DHAVE_MAP_SYNC/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/' feeds/packages/utils/xfsprogs/Makefile
+        sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
         ./scripts/feeds update -a
 
     - name: Install feeds
