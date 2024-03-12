@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: 0312-1-dockerman
+name: 0312-1+diw
 
 on:
   repository_dispatch:
@@ -21,7 +21,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: N1/0218-feeds.conf.default
-  CONFIG_FILE: N1/0312-1-dockerman.config
+  CONFIG_FILE: N1/0312-1+diw.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   TZ: Asia/Shanghai
@@ -199,7 +199,7 @@ jobs:
               bash <(curl -s -S -L nb0.cc/kiss)
               
               更新说明：
-              2024-0312：重新配置文件，passwall+SSR插件全选。 
+              2024-0312：重新配置文件，passwall+SSR插件全选，增加dockerman。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
