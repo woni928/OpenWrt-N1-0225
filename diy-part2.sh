@@ -38,10 +38,17 @@ sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl
 #./scripts/feeds install -a
 
 # 移除 openwrt feeds 自带的核心包
-rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
-git clone https://github.com/sbwml/openwrt_helloworld package/helloworld
+#rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
+#git clone https://github.com/sbwml/openwrt_helloworld package/helloworld
 
 # 更新 golang 1.22 版本
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+#rm -rf feeds/packages/lang/golang
+#git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
+sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns && rm -rf feeds/packages/net/{alist,adguardhome,smartdns}
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+./scripts/feeds install -a 
+make menuconfig
