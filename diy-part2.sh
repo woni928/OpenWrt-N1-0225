@@ -43,12 +43,20 @@ sed -i 's/192.168.1.1/192.168.123.2/g' package/base-files/files/bin/config_gener
 
 # 更新 golang 1.22 版本
 ./scripts/feeds update -a
+rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/luci/applications/luci-app-smartdns
+rm -rf feeds/packages/net/{alist,adguardhome,mosdns,smartdns}
+rm -rf feeds/smpackage/luci-app-adguardhome
+rm -rf feeds/smpackage/luci-app-bypass
 rm -rf feeds/packages/net/{xray*,v2ray*,v2ray*,sing*}
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
 find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 find ./ | grep Makefile | grep mosdns | xargs rm -f
+#find ./ | grep Makefile | grep bypass | xargs rm -f
+#find ./ | grep Makefile | grep adguardhome | xargs rm -f
 
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
