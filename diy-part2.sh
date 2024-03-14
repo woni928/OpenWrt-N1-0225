@@ -23,42 +23,27 @@ sed -i 's/192.168.1.1/192.168.123.2/g' package/base-files/files/bin/config_gener
 # 2023-08-29 aliyundrive-webdav 编译报错回滚到2.2.1
 #curl -o ./feeds/packages/multimedia/aliyundrive-webdav/Makefile https://raw.githubusercontent.com/Jason6111/OpenWrt_Personal/main/other/aliyun/Makefile
 
-# 临时修复acpid,aliyundrive-webdav,xfsprogs,perl-html-parser 导致的编译失败问题
+# 临时修复acpid,aliyundrive-webdav,xfsprogs,perl-html-parser,v2dat 导致的编译失败问题
 #sed -i 's#flto#flto -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/acpid/Makefile
 #sed -i 's/stripped/release/g' feeds/packages/multimedia/aliyundrive-webdav/Makefile
 #sed -i 's#SYNC#SYNC -D_LARGEFILE64_SOURCE#g' feeds/packages/utils/xfsprogs/Makefile
-#sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
+sed -i 's/REENTRANT -D_GNU_SOURCE/LARGEFILE64_SOURCE/g' feeds/packages/lang/perl/perlmod.mk
+sed -i 's#GO_PKG_TARGET_VARS.*# #g' feeds/packages/utils/v2dat/Makefile
 
-# 删除重复的插件。
-#./scripts/feeds clean
-#./scripts/feeds update -a
-#rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-#rm -rf feeds/packages/lang/golang
-#git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-#./scripts/feeds install -a
+# requires golang 1.20.x or latest version (openwrt-21.02 & older version needs)
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
+
+# remove v2ray-geodata package from feeds (openwrt-22.03 & master)
+rm -rf feeds/packages/net/v2ray-geodata
+#rm -rf feeds/luci/applications/luci-app-mosdns
+#rm -rf feeds/packages/net/mosdns
+
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 # 移除 openwrt feeds 自带的核心包
 #rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
 #git clone https://github.com/sbwml/openwrt_helloworld package/helloworld
 
-# 更新 golang 1.22 版本
-./scripts/feeds update -a
-rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
-rm -rf feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/luci/applications/luci-app-smartdns
-rm -rf feeds/packages/net/{alist,adguardhome,mosdns,smartdns}
-rm -rf feeds/smpackage/luci-app-adguardhome
-rm -rf feeds/smpackage/luci-app-bypass
-rm -rf feeds/packages/net/{xray*,v2ray*,v2ray*,sing*}
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
-find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-find ./ | grep Makefile | grep mosdns | xargs rm -f
-#find ./ | grep Makefile | grep bypass | xargs rm -f
-#find ./ | grep Makefile | grep adguardhome | xargs rm -f
-
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-
-./scripts/feeds install -a
