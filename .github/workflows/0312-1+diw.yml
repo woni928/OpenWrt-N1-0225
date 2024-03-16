@@ -199,7 +199,8 @@ jobs:
               bash <(curl -s -S -L nb0.cc/kiss)
               
               更新说明：
-              2024-0316：重新配置文件，passwall+SSR插件全选，diw。
+              2024-0316：重新配置文件，优化编译时间。
+              2024-0317：修复dockerman网络打不开的问题。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
