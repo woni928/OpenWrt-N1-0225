@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: 0312-1+diw
+name: 0321-1+socat
 
 on:
   repository_dispatch:
@@ -21,7 +21,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: N1/0218-feeds.conf.default
-  CONFIG_FILE: N1/0312-1+diw.config
+  CONFIG_FILE: N1/0321-1+socat.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   TZ: Asia/Shanghai
@@ -186,7 +186,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt-N1 → ${{ env.DATE }}
-        tag: N1-0312_${{ env.tag_name }}
+        tag: N1-0321_${{ env.tag_name }}
         artifacts: /workdir/upload/*
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -199,8 +199,7 @@ jobs:
               bash <(curl -s -S -L nb0.cc/kiss)
               
               更新说明：
-              2024-0316：重新配置文件，优化编译时间。
-              2024-0317：修复dockerman网络打不开的问题。
+              2024-0321：重新配置文件，优化编译时间,添加socat插件。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
