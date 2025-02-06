@@ -199,7 +199,7 @@ jobs:
               bash <(curl -s -S -L nb0.cc/kiss)
               
               更新说明：
-              2025-0204：切换到23.05，同步上游的更新。
+              2025-0206：切换到23.05，同步上游的更新。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
