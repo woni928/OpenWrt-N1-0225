@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: 23.05
+name: 2025-23.05
 
 on:
   repository_dispatch:
@@ -186,7 +186,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: OpenWrt-N1 → ${{ env.DATE }}
-        tag: N1-23.05_${{ env.tag_name }}
+        tag: N1-2305_${{ env.tag_name }}
         artifacts: /workdir/upload/*
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -199,7 +199,7 @@ jobs:
               bash <(curl -s -S -L nb0.cc/kiss)
               
               更新说明：
-              2025-0206：切换到23.05，同步上游的更新。
+              2025-0207：切换到23.05，同步上游的更新。
 
     - name: 清理Actions空间
       uses: Mattraks/delete-workflow-runs@main
